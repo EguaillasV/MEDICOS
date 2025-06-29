@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<main class="flex items-center justify-center h-full bg-gray-50 p-4">
+  <div class="flex flex-col w-full max-w-3xl bg-white rounded-2xl shadow-lg overflow-hidden h-full">
+
+    <!-- Header fijo -->
+   <div class="bg-gradient-to-r from-blue-600 to-blue-600 px-9 py-10">
+        <h1 class="text-3xl font-extrabold text-white">Detalle de Diagnóstico</h1>
+      </div>
+
+    <!-- Cuerpo scrollable -->
+    <section class="flex-1 overflow-auto p-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="border border-gray-200 rounded-lg p-4">
+        <h2 class="text-xs font-semibold text-gray-500 uppercase">Paciente</h2>
+        <p class="mt-1 text-gray-800">{{ diagnosis.patient.full_name }}</p>
+      </div>
+      <div class="border border-gray-200 rounded-lg p-4">
+        <h2 class="text-xs font-semibold text-gray-500 uppercase">Código CIE</h2>
+        <p class="mt-1 text-gray-800">{{ diagnosis.icd_code|default:"—" }}</p>
+      </div>
+      <div class="md:col-span-2 border border-gray-200 rounded-lg p-4">
+        <h2 class="text-xs font-semibold text-gray-500 uppercase">Descripción</h2>
+        <p class="mt-1 text-gray-800 whitespace-pre-line">{{ diagnosis.description }}</p>
+      </div>
+      <div class="md:col-span-2 border border-gray-200 rounded-lg p-4">
+        <h2 class="text-xs font-semibold text-gray-500 uppercase">Notas Adicionales</h2>
+        <p class="mt-1 text-gray-800">{{ diagnosis.notes|default:"—" }}</p>
+      </div>
+      <div class="border border-gray-200 rounded-lg p-4">
+        <h2 class="text-xs font-semibold text-gray-500 uppercase">Fecha y Hora</h2>
+        <p class="mt-1 text-gray-800">{{ diagnosis.date|date:"d/m/Y H:i" }}</p>
+      </div>
+      <div class="border border-gray-200 rounded-lg p-4">
+        <h2 class="text-xs font-semibold text-gray-500 uppercase">Estado</h2>
+        {% if diagnosis.is_active %}
+          <span class="inline-block px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium">Activo</span>
+        {% else %}
+          <span class="inline-block px-2 py-1 bg-red-100 text-red-800 rounded-full text-xs font-medium">Inactivo</span>
+        {% endif %}
+      </div>
+    </section>
+
+    <!-- Footer fijo -->
+    <footer class="flex-none bg-gray-50 px-8 py-4 border-t border-gray-200 flex justify-end space-x-3 rounded-b-2xl">
+      <a href="{% url 'diagnosticos:list' %}"
+         class="inline-flex items-center px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition">
+        ← Volver
+      </a>
+    </footer>
+
+  </div>
+</main>
+{% endblock %}
+
+
+
+
