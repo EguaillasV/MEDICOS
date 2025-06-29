@@ -31,7 +31,9 @@ urlpatterns = [
     path('diagnosticos/', include('applications.diagnosticos.urls')),
     path("__reload__/", include("django_browser_reload.urls")),
     path('admin/', admin.site.urls),
-    path('security/', include('applications.security.urls'))
+    path('security/', include('applications.security.urls')),
+    path('doctor/', include('applications.doctor.urls', namespace='doctor')),
+    
 ]
 
 # Si estás sirviendo archivos estáticos en desarrollo:

@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block title %}Detalles del Paciente{% endblock %}
+{% block header %}Detalles del Paciente{% endblock %}
+
+{% block content %}
+<div class="bg-white p-8 rounded-xl shadow-lg max-w-5xl mx-auto mt-8">
+
+    <!-- Título dentro de un cuadro azul -->
+    <div class="bg-blue-600 text-white p-4 rounded-lg mb-6">
+        <h2 class="text-3xl font-bold text-center">Detalles del Paciente</h2>
+    </div>
+
+    <div class="mb-6 flex justify-between items-center">
+        <a href="{% url 'pacientes:list' %}" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg shadow-md text-lg">
+            Regresar a la lista de pacientes
+        </a>
+        
+        <a href="{% url 'pacientes:update' paciente.pk %}" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg shadow-md text-lg">
+              Editar Paciente
+        </a>
+    </div>
+
+    <!-- Información del paciente -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- Foto del paciente (si existe) -->
+        {% if paciente.foto %}
+            <div class="bg-gray-50 p-4 rounded-xl shadow-md flex flex-col justify-center items-center">
+                <h3 class="text-xl font-semibold text-blue-600 mb-4">Foto del Paciente</h3>
+                <img src="{{ paciente.get_image }}" alt="Foto de {{ paciente.first_name }}" class="border-4 border-blue-300 shadow-lg w-32 h-32 object-cover rounded-lg">
+            </div>
+        {% else %}
+            <div class="bg-gray-50 p-4 rounded-xl shadow-md flex flex-col justify-center items-center">
+                <h3 class="text-xl font-semibold text-blue-600 mb-4">Foto del Paciente</h3>
+                <p class="text-center text-gray-500">No disponible</p>
+            </div>
+        {% endif %}
+
+        <!-- Información básica -->
+        <div class="bg-gray-50 p-4 rounded-xl shadow-md">
+            <h3 class="text-xl font-semibold text-blue-600">Información Básica</h3>
+            <div class="border-t-2 border-blue-300 mt-4 pt-4 space-y-2">
+                <p><strong>Nombre:</strong> {{ paciente.first_name }} {{ paciente.last_name }}</p>
+                <p><strong>Cédula:</strong> {{ paciente.cedula }}</p>
+                <p><strong>DNI:</strong> {{ paciente.dni }}</p>
+                <p><strong>Fecha de Nacimiento:</strong> {{ paciente.birth_date }}</p>
+                <p><strong>Sexo:</strong> {{ paciente.get_gender_display }}</p>
+                <p><strong>Estado Civil:</strong> {{ paciente.get_estado_civil_display }}</p>
+            </div>
+        </div>
+
+        <!-- Información de contacto -->
+        <div class="bg-gray-50 p-4 rounded-xl shadow-md">
+            <h3 class="text-xl font-semibold text-blue-600">Información de Contacto</h3>
+            <div class="border-t-2 border-blue-300 mt-4 pt-4 space-y-2">
+                <p><strong>Teléfono(s):</strong> {{ paciente.phone }}</p>
+                <p><strong>Correo Electrónico:</strong> {{ paciente.email }}</p>
+                <p><strong>Dirección:</strong> {{ paciente.address }}</p>
+            </div>
+        </div>
+
+        <!-- Historia clínica y antecedentes -->
+        <div class="col-span-2 bg-gray-50 p-4 rounded-xl shadow-md">
+            <h3 class="text-xl font-semibold text-blue-600">Historia Clínica</h3>
+            <div class="border-t-2 border-blue-300 mt-4 pt-4 space-y-2">
+                <p><strong>Antecedentes Personales:</strong> {{ paciente.antecedentes_personales|default:"No disponible" }}</p>
+                <p><strong>Antecedentes Quirúrgicos:</strong> {{ paciente.antecedentes_quirurgicos|default:"No disponible" }}</p>
+                <p><strong>Antecedentes Familiares:</strong> {{ paciente.antecedentes_familiares|default:"No disponible" }}</p>
+                <p><strong>Alergias:</strong> {{ paciente.alergias|default:"No disponible" }}</p>
+                <p><strong>Medicamentos Actuales:</strong> {{ paciente.medicamentos_actuales|default:"No disponible" }}</p>
+            </div>
+        </div>
+
+        <!-- Hábitos y vacunas -->
+        <div class="col-span-2 bg-gray-50 p-4 rounded-xl shadow-md">
+            <h3 class="text-xl font-semibold text-blue-600">Hábitos y Vacunas</h3>
+            <div class="border-t-2 border-blue-300 mt-4 pt-4 space-y-2">
+                <p><strong>Hábitos Tóxicos:</strong> {{ paciente.habitos_toxicos|default:"No disponible" }}</p>
+                <p><strong>Vacunas:</strong> {{ paciente.vacunas|default:"No disponible" }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

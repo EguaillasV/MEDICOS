@@ -1,50 +1,54 @@
 {% extends 'base.html' %}
 
-{% block title %}Pacientes - Lista{% endblock %}
+{% block title %}Lista de Pacientes{% endblock %}
 {% block header %}Listado de Pacientes{% endblock %}
 
 {% block content %}
-<div class="bg-white p-6 rounded-xl shadow-md">
+<div class="bg-white p-6 rounded-xl shadow-lg max-w-7xl mx-auto mt-8">
 
-    <!-- Cabecera con botón de volver y botón de nuevo -->
-    <div class="flex justify-between items-center mb-4">
-        <a href="{% url 'home' %}" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold">
+    <!-- Botón de "Nuevo Paciente" -->
+    <div class="flex justify-between items-center mb-6">
+        <a href="{% url 'home' %}" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold text-lg">
             ← Volver al menú principal
         </a>
 
-        <a href="{% url 'pacientes:create' %}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md">
+        <a href="{% url 'pacientes:create' %}" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg shadow-lg text-lg">
             + Nuevo Paciente
         </a>
     </div>
 
-    <table class="min-w-full border border-gray-300 rounded-lg">
-        <thead class="bg-blue-100">
-            <tr>
-                <th class="py-2 px-4 text-left">Nombre</th>
-                <th class="py-2 px-4 text-left">Cédula</th>
-                <th class="py-2 px-4 text-left">Email</th>
-                <th class="py-2 px-4 text-left">Teléfono</th>
-                <th class="py-2 px-4 text-left">Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for paciente in pacientes %}
-                <tr class="border-b hover:bg-gray-50">
-                    <td class="py-2 px-4">{{ paciente.first_name }} {{ paciente.last_name }}</td>
-                    <td class="py-2 px-4">{{ paciente.dni }}</td>
-                    <td class="py-2 px-4">{{ paciente.email }}</td>
-                    <td class="py-2 px-4">{{ paciente.phone }}</td>
-                    <td class="py-2 px-4">
-                        <a href="{% url 'pacientes:update' paciente.pk %}" class="text-blue-500 hover:underline">Editar</a> |
-                        <a href="{% url 'pacientes:delete' paciente.pk %}" class="text-red-500 hover:underline">Eliminar</a>
-                    </td>
-                </tr>
-            {% empty %}
+    <!-- Tabla de pacientes -->
+    <div class="overflow-x-auto bg-white rounded-lg shadow-sm">
+        <table class="w-full table-auto border-collapse">
+            <thead class="bg-gradient-to-r from-blue-500 to-indigo-500 text-white">
                 <tr>
-                    <td colspan="5" class="py-4 text-center text-gray-500">No hay pacientes registrados.</td>
+                    <th class="py-3 px-6 text-left text-lg font-semibold">Nombre</th>
+                    <th class="py-3 px-6 text-left text-lg font-semibold">Cédula</th>
+                    <th class="py-3 px-6 text-left text-lg font-semibold">Email</th>
+                    <th class="py-3 px-6 text-left text-lg font-semibold">Teléfono</th>
+                    <th class="py-3 px-6 text-center text-lg font-semibold">Acciones</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody class="text-gray-700">
+                {% for paciente in pacientes %}
+                    <tr class="border-b hover:bg-gray-100 transition-colors duration-300">
+                        <td class="py-3 px-6 text-sm">{{ paciente.first_name }} {{ paciente.last_name }}</td>
+                        <td class="py-3 px-6 text-sm">{{ paciente.cedula }}</td>
+                        <td class="py-3 px-6 text-sm">{{ paciente.email|default:"No disponible" }}</td>
+                        <td class="py-3 px-6 text-sm">{{ paciente.phone|default:"No disponible" }}</td>
+                        <td class="py-3 px-6 text-center">
+                            <a href="{% url 'pacientes:detail' paciente.pk %}" class="bg-green-500 hover:bg-green-600 text-black px-6 py-3 rounded-lg text-sm transition-colors duration-300">Ver</a>
+                            <a href="{% url 'pacientes:update' paciente.pk %}" class="bg-yellow-500 hover:bg-yellow-600 text-black  px-6 py-3 rounded-lg text-sm transition-colors duration-300">Editar</a>
+                            <a href="{% url 'pacientes:delete' paciente.pk %}" class="bg-red-500 hover:bg-red-600 text-black  px-6 py-3 rounded-lg text-sm transition-colors duration-300">Eliminar</a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="5" class="py-4 text-center text-gray-500">No hay pacientes registrados.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 {% endblock %}

@@ -8,4 +8,6 @@ urlpatterns = [
     path('crear/', views.PatientCreateView.as_view(), name='create'),
     path('<int:pk>/editar/', views.PatientUpdateView.as_view(), name='update'),
     path('<int:pk>/eliminar/', views.PatientDeleteView.as_view(), name='delete'),
+    path('<int:pk>/ver/', views.patient_detail, name='detail'), 
 ]
+

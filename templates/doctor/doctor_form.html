@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}Formulario de Doctor{% endblock %}
+
+{% block content %}
+<div class="bg-white p-8 rounded-xl shadow-xl max-w-4xl mx-auto mt-8">
+    <h2 class="text-3xl font-semibold text-blue-700 text-center mb-6">
+        {% if object %} Editar {% else %} Crear {% endif %} Doctor
+    </h2>
+
+    <form method="post" enctype="multipart/form-data" class="space-y-6">
+        {% csrf_token %}
+        
+        <!-- Formulario en dos columnas -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Foto del Doctor -->
+            <div class="flex flex-col">
+                <label for="{{ form.foto.id_for_label }}" class="text-sm font-medium text-gray-700">Foto</label>
+                {{ form.foto|add_class:"w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" }}
+                {% if form.foto.value %}
+                    <p class="text-gray-500 text-sm mt-2">Foto seleccionada: {{ form.foto.value }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Nombres -->
+            <div class="flex flex-col">
+                <label for="{{ form.nombres.id_for_label }}" class="text-sm font-medium text-gray-700">Nombres</label>
+                {{ form.nombres|add_class:"w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" }}
+            </div>
+
+            <!-- Apellidos -->
+            <div class="flex flex-col">
+                <label for="{{ form.apellidos.id_for_label }}" class="text-sm font-medium text-gray-700">Apellidos</label>
+                {{ form.apellidos|add_class:"w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" }}
+            </div>
+
+            <!-- RUC -->
+            <div class="flex flex-col">
+                <label for="{{ form.ruc.id_for_label }}" class="text-sm font-medium text-gray-700">RUC</label>
+                {{ form.ruc|add_class:"w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" }}
+            </div>
+<!-- Fecha de Nacimiento -->
+<div class="flex flex-col">
+    <label for="{{ form.fecha_nacimiento.id_for_label }}" class="text-sm font-medium text-gray-700">Fecha de Nacimiento</label>
+    <input type="date" name="fecha_nacimiento" id="{{ form.fecha_nacimiento.id_for_label }}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ form.fecha_nacimiento.value|default_if_none:'' }}" />
+</div>
+
+
+            <!-- Dirección de Trabajo -->
+            <div class="flex flex-col">
+                <label for="{{ form.direccion.id_for_label }}" class="text-sm font-medium text-gray-700">Dirección de Trabajo</label>
+                {{ form.direccion|add_class:"w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" }}
+            </div>
+
+            <!-- Latitud -->
+            <div class="flex flex-col">
+                <label for="{{ form.latitud.id_for_label }}" class="text-sm font-medium text-gray-700">Latitud</label>
+                {{ form.latitud|add_class:"w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" }}
+            </div>
+
+            <!-- Longitud -->
+            <div class="flex flex-col">
+                <label for="{{ form.longitud.id_for_label }}" class="text-sm font-medium text-gray-700">Longitud</label>
+                {{ form.longitud|add_class:"w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" }}
+            </div>
+
+            <!-- Código Único del Doctor -->
+            <div class="flex flex-col">
+                <label for="{{ form.codigo_unico_doctor.id_for_label }}" class="text-sm font-medium text-gray-700">Código Único del Doctor</label>
+                {{ form.codigo_unico_doctor|add_class:"w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" }}
+            </div>
+
+ 
+            <!-- Teléfonos -->
+            <div class="flex flex-col">
+                <label for="{{ form.telefonos.id_for_label }}" class="text-sm font-medium text-gray-700">Teléfonos</label>
+                {{ form.telefonos|add_class:"w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" }}
+            </div>
+
+            <!-- Correo Electrónico -->
+            <div class="flex flex-col">
+                <label for="{{ form.email.id_for_label }}" class="text-sm font-medium text-gray-700">Correo Electrónico</label>
+                {{ form.email|add_class:"w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" }}
+            </div>
+
+            <!-- Horario de Atención con Reloj -->
+            <div class="grid grid-cols-2 gap-6">
+                <!-- Hora de Inicio -->
+                <div class="flex flex-col">
+                    <label for="{{ form.hora_inicio.id_for_label }}" class="text-sm font-medium text-gray-700">Hora de Inicio</label>
+                    <input type="time" name="hora_inicio" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ form.hora_inicio.value|default_if_none:'' }}">
+                </div>
+
+                <!-- Hora de Fin -->
+                <div class="flex flex-col">
+                    <label for="{{ form.hora_fin.id_for_label }}" class="text-sm font-medium text-gray-700">Hora de Fin</label>
+                    <input type="time" name="hora_fin" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ form.hora_fin.value|default_if_none:'' }}">
+                </div>
+            </div>
+
+            <!-- Duración de Atención -->
+            <div class="flex flex-col">
+                <label for="{{ form.duracion_atencion.id_for_label }}" class="text-sm font-medium text-gray-700">Duración de Cita (minutos)</label>
+                {{ form.duracion_atencion|add_class:"w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" }}
+            </div>
+        </div>
+
+        <!-- Documentos -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+            <!-- Curriculum Vitae -->
+            <div class="flex flex-col">
+                <label for="{{ form.curriculum.id_for_label }}" class="text-sm font-medium text-gray-700">Curriculum Vitae</label>
+                {{ form.curriculum|add_class:"w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" }}
+            </div>
+
+            <!-- Firma Digital -->
+            <div class="flex flex-col">
+                <label for="{{ form.firma_digital.id_for_label }}" class="text-sm font-medium text-gray-700">Firma Digital</label>
+                {{ form.firma_digital|add_class:"w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" }}
+            </div>
+
+            <!-- Imagen para Recetas -->
+            <div class="flex flex-col">
+                <label for="{{ form.imagen_receta.id_for_label }}" class="text-sm font-medium text-gray-700">Imagen para Recetas</label>
+                {{ form.imagen_receta|add_class:"w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" }}
+            </div>
+        </div>
+
+        <!-- Botones -->
+        <div class="flex justify-end mt-6 space-x-4">
+            <a href="{% url 'doctor:list' %}" class="bg-gray-400 hover:bg-gray-500 text-white px-6 py-2 rounded-md">Cancelar</a>
+            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-2 rounded-md">Grabar Doctor</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+

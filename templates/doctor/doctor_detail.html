@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Detalles del Doctor{% endblock %}
+
+{% block content %}
+<div class="bg-white p-6 rounded-xl shadow-md max-w-4xl mx-auto mt-6">
+    <h2 class="text-2xl font-bold text-blue-700 text-center mb-6">Detalles del Doctor</h2>
+
+    <div>
+        <p><strong>Nombre:</strong> {{ doctor.nombre_completo }}</p>
+        <p><strong>RUC:</strong> {{ doctor.ruc }}</p>
+        <p><strong>Dirección:</strong> {{ doctor.direccion }}</p>
+        <p><strong>Especialidad:</strong> {{ doctor.especialidad.all|join:", " }}</p>
+        <p><strong>Teléfono(s):</strong> {{ doctor.telefonos }}</p>
+        <p><strong>Email:</strong> {{ doctor.email }}</p>
+        <p><strong>Horario de Atención:</strong> {{ doctor.horario_atencion }}</p>
+    </div>
+    <div class="mt-4">
+        <a href="{% url 'doctor:update' doctor.pk %}" class="bg-yellow-500 hover:bg-yellow-600 text-black px-4 py-2 rounded-lg text-sm">
+            Editar
+        </a>
+        <a href="{% url 'doctor:delete' doctor.pk %}" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm">
+            Eliminar
+        </a>
+    </div>
+</div>
+{% endblock %}

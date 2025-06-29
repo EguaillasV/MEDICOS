@@ -50,6 +50,7 @@ THIRD_PARTY_APPS = [
     'tailwind', 
     'theme',
     'django_browser_reload', 
+    
 ]
 
 # Aplicaciones locales

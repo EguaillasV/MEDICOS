@@ -20,11 +20,11 @@
     <form method="post" class="flex justify-center space-x-4">
       {% csrf_token %}
       <a href="{% url 'pacientes:list' %}"
-         class="px-5 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400 transition">
+         class="px-6 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400 transition">
         Cancelar
       </a>
       <button type="submit"
-              class="px-5 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">
+               class="px-6 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400 transition">
         Eliminar
       </button>
     </form>

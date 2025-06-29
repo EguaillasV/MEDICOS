@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Doctores{% endblock %}
+
+{% block header %}Listado de Doctores{% endblock %}
+
+{% block content %}
+<div class="bg-white p-8 rounded-xl shadow-xl max-w-7xl mx-auto mt-8">
+
+    <h2 class="text-3xl font-semibold text-blue-700 text-center mb-8">Lista de Doctores</h2>
+
+    <div class="flex justify-end mb-6">
+        <a href="{% url 'doctor:create' %}" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg shadow-md text-lg font-semibold transition-all transform hover:scale-105">+ Nuevo Doctor</a>
+    </div>
+
+    <!-- Tabla de Doctores -->
+    <div class="overflow-x-auto bg-white shadow-md rounded-lg">
+        <table class="min-w-full table-auto border-collapse">
+            <thead class="bg-gradient-to-r from-blue-500 to-indigo-500 text-white">
+                <tr>
+                    <th class="py-3 px-6 text-left text-lg font-semibold">Nombre</th>
+                    <th class="py-3 px-6 text-left text-lg font-semibold">RUC</th>
+                    <th class="py-3 px-6 text-left text-lg font-semibold">Especialidad</th>
+                    <th class="py-3 px-6 text-center text-lg font-semibold">Acciones</th>
+                </tr>
+            </thead>
+            <tbody class="text-gray-700">
+                {% for doctor in doctores %}
+                    <tr class="border-b hover:bg-gray-50 transition duration-200 ease-in-out">
+                        <td class="py-4 px-6 text-sm font-medium">{{ doctor.nombre_completo }}</td>
+                        <td class="py-4 px-6 text-sm">{{ doctor.ruc }}</td>
+                        <td class="py-4 px-6 text-sm">{{ doctor.especialidad.all|join:", " }}</td>
+                        <td class="py-4 px-6 text-center space-x-2">
+                            <a href="{% url 'doctor:detail' doctor.pk %}" class="bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-lg text-sm transition-all transform hover:scale-105">Ver</a>
+                            <a href="{% url 'doctor:update' doctor.pk %}" class="bg-yellow-500 hover:bg-yellow-600 text-white px-5 py-2 rounded-lg text-sm transition-all transform hover:scale-105">Editar</a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="4" class="py-4 text-center text-gray-500">No hay doctores registrados.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+{% endblock %}
