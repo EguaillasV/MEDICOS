@@ -1,2 +1,32 @@
+# Entorno virtual
+.venv/
+env/
+venv/
+
+# Archivos compilados de Python
 __pycache__/
+*.py[cod]
+*$py.class
+
+# SQLite
+*.sqlite3
+
+# Archivos temporales del sistema
+.DS_Store
+Thumbs.db
+
+# Configuración de IDEs
+.vscode/
+.idea/
+
+# Archivos de migraciones (opcional)
+*/migrations/*.py
+*/migrations/*.pyc
+
+# Archivos de log y datos temporales
+*.log
+*.pot
 *.pyc
+
+# Archivos de medios subidos (opcional si no usas S3 u otro)
+media/
