@@ -108,14 +108,14 @@ class Doctor(models.Model):
         help_text="Tiempo estándar asignado a cada paciente."
     )
     curriculum = models.FileField(
-        upload_to='core/curriculums/',
+        upload_to='applications/curriculums/',
         verbose_name="Currículum Vitae",
         null=True,
         blank=True,
         help_text="Archivo PDF o DOC (opcional)."
     )
     firma_digital = models.ImageField(
-        upload_to='core/firmas/',
+        upload_to='applications/firmas/',
         verbose_name="Firma Digital",
         null=True,
         blank=True,
@@ -130,7 +130,7 @@ class Doctor(models.Model):
     
     
     imagen_receta = models.ImageField(
-        upload_to='core/recetas/',
+        upload_to='applications/recetas/',
         verbose_name="Imagen para Recetas",
         null=True,
         blank=True,
@@ -153,3 +153,36 @@ class Doctor(models.Model):
         verbose_name = "Doctor"
         verbose_name_plural = "Doctores"
         ordering = ['apellidos', 'nombres']
+
+
+
+class Cargo(models.Model):
+    # Nombre del cargo (ej. Médico, Enfermero, Administrador, etc.)
+    nombre = models.CharField(
+        max_length=100,
+        unique=True,
+        verbose_name="Nombre del Cargo",
+        help_text="Ej.: Médico, Enfermero, Administrador"
+    )
+
+    # Descripción del cargo (opcional)
+    descripcion = models.TextField(
+        verbose_name="Descripción del Cargo",
+        null=True,
+        blank=True,
+        help_text="Descripción breve del rol que cumple este cargo (opcional)."
+    )
+
+    activo = models.BooleanField(
+        default=True,
+        verbose_name="Activo",
+        help_text="Desactiva este cargo si ya no se usa en el sistema."
+    )
+
+    def __str__(self):
+        return self.nombre
+
+    class Meta:
+        verbose_name = "Cargo"
+        verbose_name_plural = "Cargos"
+        ordering = ['nombre']  # Orden alfabético en listados del admin

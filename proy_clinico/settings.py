@@ -59,6 +59,7 @@ LOCAL_APPS = [
     'applications.diagnosticos',
     'applications.security.apps.SecurityConfig',
     'applications.doctor.apps.DoctorConfig',
+    'applications.empleado',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS

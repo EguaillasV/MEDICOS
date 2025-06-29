@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Detalle del Cargo{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto mt-8 px-4">
+    <!-- Encabezado azul con título -->
+    <div class="bg-blue-600 text-white rounded-xl px-6 py-4 shadow-lg flex justify-center items-center mb-6">
+        <h2 class="text-3xl font-bold">📌 Detalles del Cargo</h2>
+    </div>
+
+    <!-- Botones arriba -->
+    <div class="flex justify-between mb-6">
+        <a href="{% url 'cargo:list' %}"
+           class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md shadow transition text-sm font-medium">
+            ⬅️ Regresar a la lista
+        </a>
+        <a href="{% url 'cargo:update' cargo.pk %}"
+           class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md shadow transition text-sm font-medium">
+            ✏️ Editar Cargo
+        </a>
+    </div>
+
+    <!-- Contenido del detalle -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-white p-6 rounded-xl shadow border">
+            <h3 class="text-blue-700 font-semibold text-lg mb-2">🔹 Nombre del Cargo</h3>
+            <p class="text-gray-800">{{ cargo.nombre }}</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow border">
+            <h3 class="text-blue-700 font-semibold text-lg mb-2">✅ Estado</h3>
+            <p class="text-gray-800">{{ cargo.activo|yesno:"Activo,Inactivo" }}</p>
+        </div>
+
+        <div class="md:col-span-2 bg-white p-6 rounded-xl shadow border">
+            <h3 class="text-blue-700 font-semibold text-lg mb-2">📝 Descripción</h3>
+            <p class="text-gray-800">{{ cargo.descripcion|default:"Sin descripción." }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

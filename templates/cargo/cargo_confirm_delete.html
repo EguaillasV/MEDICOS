@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Eliminar Cargo{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto mt-16 bg-white border border-gray-200 rounded-2xl shadow-xl p-8">
+    <h2 class="text-3xl font-bold text-red-600 mb-4 text-center flex items-center justify-center gap-2">
+        ❌ Confirmar Eliminación
+    </h2>
+    <p class="text-center text-gray-700 mb-6">
+        ¿Estás seguro que deseas eliminar el cargo 
+        <strong class="text-gray-900">{{ cargo.nombre }}</strong>?<br>
+        Esta acción no se puede deshacer.
+    </p>
+
+    <form method="post" class="flex justify-center gap-4">
+        {% csrf_token %}
+        <button type="submit"
+            class="bg-gray-300 hover:bg-gray-400 text-black px-6 py-2 rounded-md shadow transition duration-200">
+             Sí, eliminar
+        </button>
+        <a href="{% url 'cargo:list' %}"
+           class="bg-gray-300 hover:bg-gray-400 text-black px-6 py-2 rounded-md shadow transition duration-200">
+             Cancelar
+        </a>
+    </form>
+</div>
+{% endblock %}

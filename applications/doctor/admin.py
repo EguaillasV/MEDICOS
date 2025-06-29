@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Doctor, Especialidad
+from .models import Cargo
 
 # Registrar el modelo Doctor
 class DoctorAdmin(admin.ModelAdmin):
@@ -15,5 +16,12 @@ class EspecialidadAdmin(admin.ModelAdmin):
     search_fields = ('nombre',)
 
 admin.site.register(Especialidad, EspecialidadAdmin)
+
+
+@admin.register(Cargo)
+class CargoAdmin(admin.ModelAdmin):
+    list_display = ('nombre', 'descripcion', 'activo')
+    search_fields = ('nombre',)
+    list_filter = ('activo',)
 
 

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block title %}{{ form.instance.pk|yesno:"Editar Empleado,Nuevo Empleado" }}{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto mt-10">
+    <div class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-t-xl px-6 py-4 shadow-lg">
+        <h2 class="text-2xl font-bold text-center">{{ form.instance.pk|yesno:"✏️ Editar Empleado,➕ Nuevo Empleado" }}</h2>
+        <p class="text-sm text-center mt-1">Complete la información del empleado.</p>
+    </div>
+
+    <div class="bg-white rounded-b-xl shadow-xl px-8 py-6">
+        <form method="post" enctype="multipart/form-data" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {% csrf_token %}
+
+            {% for field in form %}
+            <div class="col-span-1">
+                <label class="block text-sm font-semibold text-gray-700 mb-1">{{ field.label }}</label>
+                {{ field|add_class:"form-input w-full border border-gray-300 rounded-md px-4 py-2" }}
+                {% if field.errors %}
+                <p class="text-red-600 text-sm mt-1">{{ field.errors.0 }}</p>
+                {% endif %}
+            </div>
+            {% endfor %}
+
+            <div class="md:col-span-2 flex justify-between mt-6">
+                <a href="{% url 'empleado:list' %}" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-2 rounded-md shadow">⬅️ Volver</a>
+                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md shadow">💾 Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

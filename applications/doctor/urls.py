@@ -11,3 +11,4 @@ urlpatterns = [
     path('<int:pk>/eliminar/', views.DoctorDeleteView.as_view(), name='delete'),  # Eliminar doctor
 ]
 
+

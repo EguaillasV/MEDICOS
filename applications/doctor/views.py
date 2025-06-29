@@ -29,13 +29,13 @@ class DoctorCreateView(CreateView):
         return response
 
 
-# Vista para editar los datos de un Doctor
 class DoctorUpdateView(UpdateView):
     model = Doctor
     form_class = DoctorForm
-    template_name = 'doctor/doctor_form.html'  # La plantilla que usas para editar
-    success_url = reverse_lazy('doctor:detail')  # Redirige a la página de detalle del doctor después de guardar
+    template_name = 'doctor/doctor_form.html'
 
+    def get_success_url(self):
+        return reverse_lazy('doctor:detail', kwargs={'pk': self.object.pk})
 # Vista para ver los detalles de un Doctor
 class DoctorDetailView(DetailView):
     model = Doctor
@@ -56,3 +56,36 @@ class DoctorListView(ListView):
 
     def get_queryset(self):
         return Doctor.objects.all()  # Aquí puedes aplicar filtros si es necesario
+    
+    
+    
+from django.views.generic import ListView, CreateView, UpdateView, DetailView, DeleteView
+from .models import Cargo
+from django.urls import reverse_lazy
+
+class CargoListView(ListView):
+    model = Cargo
+    template_name = 'cargo/cargo_list.html'
+    context_object_name = 'cargos'
+
+class CargoCreateView(CreateView):
+    model = Cargo
+    template_name = 'cargo/cargo_form.html'
+    fields = '__all__'
+    success_url = reverse_lazy('cargo:list')
+
+class CargoUpdateView(UpdateView):
+    model = Cargo
+    template_name = 'cargo/cargo_form.html'
+    fields = '__all__'
+    success_url = reverse_lazy('cargo:list')
+
+class CargoDetailView(DetailView):
+    model = Cargo
+    template_name = 'cargo/cargo_detail.html'
+    context_object_name = 'cargo'
+
+class CargoDeleteView(DeleteView):
+    model = Cargo
+    template_name = 'cargo/cargo_confirm_delete.html'
+    success_url = reverse_lazy('cargo:list')

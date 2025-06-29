@@ -11,10 +11,10 @@
     <form method="post">
         {% csrf_token %}
         <div class="flex justify-end mt-4">
-            <a href="{% url 'doctor:list' %}" class="bg-gray-400 hover:bg-gray-500 text-white px-6 py-2 rounded-md mr-2">
+            <a href="{% url 'doctor:list' %}" class="bg-gray-400 hover:bg-gray-500 text-black px-6 py-2 rounded-md mr-2">
                 Cancelar
             </a>
-            <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-md">
+            <button type="submit" class="bg-red-600 hover:bg-red-700 text-black px-6 py-2 rounded-md">
                 Eliminar
             </button>
         </div>

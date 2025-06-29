@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}Lista de Empleados{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto mt-10 px-4">
+    <div class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl shadow-xl px-8 py-6 mb-6">
+        <h2 class="text-3xl font-bold flex items-center gap-2">👨‍⚕️ Lista de Empleados</h2>
+        <p class="text-sm mt-2 text-blue-100">Gestiona todos los empleados registrados en la clínica.</p>
+    </div>
+
+    <div class="flex justify-end mb-4">
+        <a href="{% url 'empleado:create' %}" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg shadow">
+            ➕ Nuevo Empleado
+        </a>
+    </div>
+
+    <div class="overflow-x-auto bg-white rounded-lg shadow-md">
+        <table class="w-full text-left table-auto">
+            <thead class="bg-blue-600 text-white">
+                <tr>
+                    <th class="py-3 px-6">Nombre</th>
+                    <th class="py-3 px-6">Cédula</th>
+                    <th class="py-3 px-6">Cargo</th>
+                    <th class="py-3 px-6 text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody class="text-gray-700">
+                {% for empleado in empleados %}
+                <tr class="border-b hover:bg-gray-50">
+                    <td class="py-4 px-6">{{ empleado.nombre_completo }}</td>
+                    <td class="py-4 px-6">{{ empleado.cedula_ecuatoriana }}</td>
+                    <td class="py-4 px-6">{{ empleado.cargo }}</td>
+                    <td class="py-4 px-6 text-center space-x-2">
+                        <a href="{% url 'empleado:detail' empleado.pk %}" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded text-sm">Ver</a>
+                        <a href="{% url 'empleado:update' empleado.pk %}" class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1.5 rounded text-sm">Editar</a>
+                        <a href="{% url 'empleado:delete' empleado.pk %}" onclick="return confirm('¿Seguro que deseas eliminar este empleado?');" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded text-sm">Eliminar</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="4" class="text-center py-4 text-gray-500">No hay empleados registrados.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
